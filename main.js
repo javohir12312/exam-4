@@ -142,7 +142,7 @@ setTimeout(() => {
     modalBtn.click();
     localStorage.setItem("modal", JSON.stringify("modal"))
   }}
-}, 5000);
+}, 10000);
 render(token);
 
 
