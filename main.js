@@ -150,6 +150,4 @@ window.addEventListener("load", ()=> {
   let loader = document.querySelector(".load")
 
   loader.classList.add("d-none");
-
-  // loader.addEventListener("")
 })
