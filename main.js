@@ -5,8 +5,11 @@ let elToSumm = document.querySelector(".to__summ")
 let elData = document.querySelector(".data")
 let local = window.localStorage.getItem("token");
 
-let token = [];
+let cart = document.querySelector(".span");
 
+
+let token = [];
+let arr = []
 if (local) {
   token = JSON.parse(local)
 }
@@ -35,6 +38,7 @@ function render(token) {
 
   for (let i = 0; i < token.length; i++) {
     let newTr = document.createElement("tr")
+    newTr.dataset.id = token[i].id;
     let newThCode = document.createElement("th")
     let newThName = document.createElement("td")
     let newThWord = document.createElement("td")
@@ -58,16 +62,35 @@ function render(token) {
     newThData.textContent = token[i].Date;
 
     // Create button
-    // let ellabel = document.createElement("label")
+    let ellabel = document.createElement("label")
 
-    // let elinp = document.createElement("input")
-    // elinp.type = "checkbox"
+    let elinp = document.createElement("input")
+    elinp.type = "checkbox"
+    elinp.style.display = 'none'
 
-    // let elbtn = document.createElement("button")
-    // elbtn.textContent = 'go'
+    let elbtn = document.createElement("span")
+    elbtn.classList.add("p-2", "rounded-2")
+    elbtn.textContent = 'Save'
+    elbtn.style.cursor = "pointer"
 
-    // ellabel.append(elinp, elbtn)
-    // newThBookmark.append(ellabel)
+
+    
+    elinp.addEventListener("click", (evt) => {
+
+      let newId = evt.target.parentNode.parentNode.parentNode.dataset.id; 
+      if(elinp.checked == 1){
+        arr.push(newId);
+        cart.textContent = arr.length;
+        elbtn.style.background = "green"
+      }else if(elinp.checked == 0){
+        arr.length--
+        cart.textContent = arr.length
+        elbtn.style.background = "white"
+      }
+    })
+
+    ellabel.append(elinp, elbtn)
+    newThBookmark.append(ellabel)
 
     // Appand all to tr
     newTr.append(newThCode, newThName, newThWord, newThMoney, newThData, newThBookmark)
